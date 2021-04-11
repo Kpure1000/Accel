@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Basic">
+      <UniqueIdentifier>{4779E00C-B38D-08BE-7C0F-AC1DE8E204EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Accel.h" />
+    <ClInclude Include="src\Basic\Ray.h">
+      <Filter>Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\acpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Basic\Ray.cpp">
+      <Filter>Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\acpch.cpp" />
+  </ItemGroup>
+</Project>
