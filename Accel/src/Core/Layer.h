@@ -14,7 +14,7 @@ namespace accel
 
 		virtual void OnAttach() {}
 		virtual void OnDetch() {}
-		virtual void OnUpdate(Ref<sf::RenderWindow> window) {}
+		virtual void OnUpdate() {}
 		virtual void OnEvent(sf::Event& e) {}
 
 		inline const std::string& GetName() const { return m_DebugName; }

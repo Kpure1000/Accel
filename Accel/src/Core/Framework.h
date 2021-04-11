@@ -8,8 +8,7 @@ namespace accel
 	class AC_API Framework
 	{
 	public:
-		Framework();
-		virtual ~Framework();
+		inline static Framework* GetInstance() { return m_Instance; }
 
 		void Run();
 
@@ -23,6 +22,12 @@ namespace accel
 
 		inline sf::Vector2u GetSize() { return m_Window->getSize(); }
 
+		inline sf::RenderWindow& GetWindow() { return *m_Window; }
+
+	protected:
+		Framework();
+		virtual ~Framework();
+
 	private:
 		Ref<sf::RenderWindow>m_Window;
 
@@ -30,6 +35,7 @@ namespace accel
 
 		LayerStack m_LayerStack;
 		
+		static Framework* m_Instance;
 	};
 
 	Ref<Framework> CreateFramework();

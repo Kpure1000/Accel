@@ -21,11 +21,15 @@
 namespace accel
 {
 
+	Framework* Framework::m_Instance = nullptr;
+
 	Framework::Framework()
 	{
 		m_Window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600),
 			"Accel Framework", sf::Style::Close | sf::Style::Titlebar);
 
+		m_Instance = this;
+		m_Window->setFramerateLimit(60);
 	}
 
 	Framework::~Framework()
@@ -46,7 +50,7 @@ namespace accel
 
 			for (auto& layer : m_LayerStack)
 			{
-				layer->OnUpdate(m_Window);
+				layer->OnUpdate();
 			}
 
 			m_Window->display();
