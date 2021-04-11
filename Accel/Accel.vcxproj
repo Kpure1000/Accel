@@ -19,13 +19,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
@@ -41,76 +41,78 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\Debug-windows-x86_64\Accel\</OutDir>
     <IntDir>..\bin-int\Debug-windows-x86_64\Accel\</IntDir>
     <TargetName>Accel</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Release-windows-x86_64\Accel\</OutDir>
     <IntDir>..\bin-int\Release-windows-x86_64\Accel\</IntDir>
     <TargetName>Accel</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>acpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AC_PLATFORM_WINDOWS;AC_BUILD_DLL;AC_DYLIB;SFML_STATIC;AC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AC_PLATFORM_WINDOWS;AC_STLIB;SFML_STATIC;AC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ImportLibrary>..\bin\Debug-windows-x86_64\Accel\Accel.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Accel\Accel.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Accel\Accel.dll ..\bin\Debug-windows-x86_64\SandBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Accel\Accel.dll ..\bin\Debug-windows-x86_64\SandBox &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;winmm.lib;ws2_32.lib;gdi32.lib;vendor\SFML\flac.lib;vendor\SFML\freetype.lib;vendor\SFML\ogg.lib;vendor\SFML\openal32.lib;vendor\SFML\vorbisenc.lib;vendor\SFML\vorbisfile.lib;vendor\SFML\vorbis.lib;vendor\SFML\sfml-window-s-d.lib;vendor\SFML\sfml-system-s-d.lib;vendor\SFML\sfml-graphics-s-d.lib;vendor\SFML\sfml-audio-s-d.lib;vendor\SFML\sfml-network-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>acpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AC_PLATFORM_WINDOWS;AC_BUILD_DLL;AC_DYLIB;SFML_STATIC;AC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AC_PLATFORM_WINDOWS;AC_STLIB;SFML_STATIC;AC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ImportLibrary>..\bin\Release-windows-x86_64\Accel\Accel.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\Accel\Accel.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Accel\Accel.dll ..\bin\Release-windows-x86_64\SandBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Accel\Accel.dll ..\bin\Release-windows-x86_64\SandBox &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;winmm.lib;ws2_32.lib;gdi32.lib;vendor\SFML\flac.lib;vendor\SFML\freetype.lib;vendor\SFML\ogg.lib;vendor\SFML\openal32.lib;vendor\SFML\vorbisenc.lib;vendor\SFML\vorbisfile.lib;vendor\SFML\vorbis.lib;vendor\SFML\sfml-window-s.lib;vendor\SFML\sfml-system-s.lib;vendor\SFML\sfml-graphics-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Accel.h" />
     <ClInclude Include="src\Basic\Ray.h" />
     <ClInclude Include="src\Core\Core.h" />
+    <ClInclude Include="src\Core\EntryPoint.h" />
+    <ClInclude Include="src\Core\Framework.h" />
+    <ClInclude Include="src\Core\Layer.h" />
+    <ClInclude Include="src\Core\LayerStack.h" />
+    <ClInclude Include="src\Utils\Singleton.h" />
     <ClInclude Include="src\acpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Basic\Ray.cpp" />
+    <ClCompile Include="src\Core\Framework.cpp" />
+    <ClCompile Include="src\Core\Layer.cpp" />
+    <ClCompile Include="src\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Utils\Singleton.cpp" />
     <ClCompile Include="src\acpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

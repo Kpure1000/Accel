@@ -7,6 +7,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{F68B420E-62A0-6ABF-2B22-0E1F97F566F0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Accel.h" />
@@ -16,11 +19,38 @@
     <ClInclude Include="src\Core\Core.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\EntryPoint.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Framework.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Layer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\LayerStack.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
     <ClInclude Include="src\acpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Basic\Ray.cpp">
       <Filter>Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Framework.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Layer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\LayerStack.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\Singleton.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\acpch.cpp" />
   </ItemGroup>

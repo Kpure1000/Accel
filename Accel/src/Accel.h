@@ -1,11 +1,24 @@
 #pragma once
 
 ////////////////////////
+/// Core
+////////////////////////
+
+#include <Core/Core.h>
+#include "Core/Framework.h"
+
+////////////////////////
 /// Basic
 ////////////////////////
 
 #include "Basic/Ray.h"
 
 ////////////////////////
-/// ?
+/// Utils
 ////////////////////////
+
+#include "Utils/Singleton.h"
+
+#ifdef CLIENT_ENTRY
+#include <Core/EntryPoint.h>
+#endif // CLIENT_ENTRY

@@ -12,7 +12,7 @@ workspace "Accel"
 
 	flags
 	{
-		"MultiProcessorCompile"
+		--"MultiProcessorCompile"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -32,10 +32,10 @@ IncludeDir["SFML"] = "Accel/vendor/SFML/include"
 
 project "Accel"
 	location "Accel"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "On"
+	staticruntime "default"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -59,6 +59,23 @@ project "Accel"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/SFML/include",
 	}
+	
+	links
+	{
+		"opengl32.lib",
+		"winmm.lib",
+		"ws2_32.lib",
+		"gdi32.lib",
+		
+		"Accel/vendor/SFML/flac.lib",
+		"Accel/vendor/SFML/freetype.lib",
+		"Accel/vendor/SFML/ogg.lib",
+		"Accel/vendor/SFML/openal32.lib",
+		
+		"Accel/vendor/SFML/vorbisenc.lib",
+		"Accel/vendor/SFML/vorbisfile.lib",
+		"Accel/vendor/SFML/vorbis.lib",
+	}
 
 	filter "system:windows"
 		systemversion "latest"
@@ -66,34 +83,48 @@ project "Accel"
 		defines
 		{
 			"AC_PLATFORM_WINDOWS",
-			"AC_BUILD_DLL",
-			dynamicdef,
+			staticdef,
 			
 			"SFML_STATIC"
 		}
 
-		postbuildcommands 
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
-		}
+		--postbuildcommands 
+		--{
+		--		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
+		--}
 
 	filter "configurations:Debug"
 		defines "AC_DEBUG"
 		runtime "Debug"
 		symbols "On"
 
+		links
+		{
+			"Accel/vendor/SFML/sfml-window-s-d.lib",
+			"Accel/vendor/SFML/sfml-system-s-d.lib",
+			"Accel/vendor/SFML/sfml-graphics-s-d.lib",
+			"Accel/vendor/SFML/sfml-audio-s-d.lib",
+			"Accel/vendor/SFML/sfml-network-s-d.lib",
+		}
+
 	filter "configurations:Release"
 		defines "AC_RELEASE"
 		runtime "Release"
 		optimize "On"
 		
+		links
+		{
+			"Accel/vendor/SFML/sfml-window-s.lib",
+			"Accel/vendor/SFML/sfml-system-s.lib",
+			"Accel/vendor/SFML/sfml-graphics-s.lib",
+		}
 
 project "SandBox"
 	location "SandBox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "On"
+	staticruntime "default"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -117,8 +148,16 @@ project "SandBox"
 		"opengl32.lib",
 		"winmm.lib",
 		"ws2_32.lib",
+		"gdi32.lib",
 		
-		"Accel/vendor/SFML/*.lib",
+		"Accel/vendor/SFML/flac.lib",
+		"Accel/vendor/SFML/freetype.lib",
+		"Accel/vendor/SFML/ogg.lib",
+		"Accel/vendor/SFML/openal32.lib",
+		
+		"Accel/vendor/SFML/vorbisenc.lib",
+		"Accel/vendor/SFML/vorbisfile.lib",
+		"Accel/vendor/SFML/vorbis.lib",
 	}
 
 	filter "system:windows"
@@ -128,8 +167,8 @@ project "SandBox"
 		{
 			"AC_PLATFORM_WINDOWS",
 			
-			dynamicdef,
-			"SFML_STATIC",
+			staticdef,
+			"SFML_STATIC"
 		}
 
 	filter "configurations:Debug"
@@ -137,9 +176,25 @@ project "SandBox"
 		runtime "Debug"
 		symbols "On"
 		
+		links
+		{
+			"Accel/vendor/SFML/sfml-window-s-d.lib",
+			"Accel/vendor/SFML/sfml-system-s-d.lib",
+			"Accel/vendor/SFML/sfml-graphics-s-d.lib",
+			"Accel/vendor/SFML/sfml-audio-s-d.lib",
+			"Accel/vendor/SFML/sfml-network-s-d.lib",
+		}
+
 
 	filter "configurations:Release"
 		defines "AC_RELEASE"
 		runtime "Release"
 		optimize "On"
 		
+		links
+		{
+			"Accel/vendor/SFML/sfml-window-s.lib",
+			"Accel/vendor/SFML/sfml-system-s.lib",
+			"Accel/vendor/SFML/sfml-graphics-s.lib",
+		}
+

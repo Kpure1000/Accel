@@ -58,45 +58,45 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AC_PLATFORM_WINDOWS;AC_DYLIB;SFML_STATIC;AC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AC_PLATFORM_WINDOWS;AC_STLIB;SFML_STATIC;AC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Accel\vendor\SFML\include;..\Accel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;winmm.lib;ws2_32.lib;..\Accel\vendor\SFML\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;winmm.lib;ws2_32.lib;gdi32.lib;..\Accel\vendor\SFML\flac.lib;..\Accel\vendor\SFML\freetype.lib;..\Accel\vendor\SFML\ogg.lib;..\Accel\vendor\SFML\openal32.lib;..\Accel\vendor\SFML\vorbisenc.lib;..\Accel\vendor\SFML\vorbisfile.lib;..\Accel\vendor\SFML\vorbis.lib;..\Accel\vendor\SFML\sfml-window-s-d.lib;..\Accel\vendor\SFML\sfml-system-s-d.lib;..\Accel\vendor\SFML\sfml-graphics-s-d.lib;..\Accel\vendor\SFML\sfml-audio-s-d.lib;..\Accel\vendor\SFML\sfml-network-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AC_PLATFORM_WINDOWS;AC_DYLIB;SFML_STATIC;AC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AC_PLATFORM_WINDOWS;AC_STLIB;SFML_STATIC;AC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\Accel\vendor\SFML\include;..\Accel\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;winmm.lib;ws2_32.lib;..\Accel\vendor\SFML\*.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;winmm.lib;ws2_32.lib;gdi32.lib;..\Accel\vendor\SFML\flac.lib;..\Accel\vendor\SFML\freetype.lib;..\Accel\vendor\SFML\ogg.lib;..\Accel\vendor\SFML\openal32.lib;..\Accel\vendor\SFML\vorbisenc.lib;..\Accel\vendor\SFML\vorbisfile.lib;..\Accel\vendor\SFML\vorbis.lib;..\Accel\vendor\SFML\sfml-window-s.lib;..\Accel\vendor\SFML\sfml-system-s.lib;..\Accel\vendor\SFML\sfml-graphics-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandBox.cpp" />
+    <ClInclude Include="src\TestLayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\SandBoxApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Accel\Accel.vcxproj">
