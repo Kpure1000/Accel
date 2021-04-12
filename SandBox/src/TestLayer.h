@@ -46,9 +46,17 @@ class TestLayer : public accel::Layer
 public:
 	TestLayer()
 	{
+		knnContainer = new accel::FlatList<Point>();
 		m_Player = Point(5.0f);
 		m_Player.SetPosition({ 100.0f, 100.0f });
 		m_Player.SetColor(sf::Color::Green);
+
+		m_PlayerGiz = sf::CircleShape(99.0f);
+		m_PlayerGiz.setPosition(m_Player.GetPosition());
+		m_PlayerGiz.setOrigin({ m_PlayerGiz.getRadius(),m_PlayerGiz.getRadius() });
+		m_PlayerGiz.setOutlineThickness(1.0f);
+		m_PlayerGiz.setFillColor(sf::Color(0xceac5400));
+		m_PlayerGiz.setOutlineColor(sf::Color(0xff0000dd));
 
 		m_Enemies.reserve(32);
 	}
@@ -67,30 +75,29 @@ public:
 		{
 			m_Player.Hightlight(true);
 			m_Player.SetPosition((sf::Vector2f)sf::Mouse::getPosition(window));
+			m_PlayerGiz.setPosition(m_Player.GetPosition());
 		}
 		else
 		{
 			m_Player.Hightlight(false);
 		}
 
-		
-		std::vector<PointDis> pdis;
-		pdis.reserve(m_Enemies.size());
-		
-		for (auto& enmy : m_Enemies)
-		{
-			pdis.emplace_back(&enmy, DistanceSq(enmy.GetPosition(), m_Player.GetPosition()));
-		}
-
-		std::sort(pdis.begin(), pdis.end(), [](const PointDis& a, const PointDis& b)->bool
+		knnContainer->Create(m_Enemies);
+		knnContainer->FindIf_Set(
+			[this](Point* obj)->bool
 			{
-				return a.dis < b.dis;
-			});
-
-		for (size_t i = 0; i < pdis.size(); i++)
-		{
-			pdis[i].p->Hightlight(i < 10);
-		}
+				return this->DistanceSq(obj->GetPosition(), this->m_Player.GetPosition()) < 10000.0f;
+			},
+			[this](const Point* a, const Point* b)->bool
+			{
+				return this->DistanceSq(a->GetPosition(), this->m_Player.GetPosition()) <
+					this->DistanceSq(b->GetPosition(), this->m_Player.GetPosition());
+			},
+				[](bool isInL, Point* obj)
+			{
+				obj->Hightlight(isInL);
+			}
+			);
 
 		// draw enemies
 		for (auto& enmy : m_Enemies)
@@ -100,6 +107,11 @@ public:
 
 		// draw player
 		window.draw(m_Player);
+
+		//  draw player gizmo
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			window.draw(m_PlayerGiz);
+
 	}
 
 	virtual void OnEvent(sf::Event& e)
@@ -110,6 +122,8 @@ public:
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 			{
 				Point newEnmy = Point(3.0f);
+				newEnmy.SetColor(sf::Color(0xffffff88));
+				newEnmy.Hightlight(false);
 				newEnmy.SetPosition((sf::Vector2f)sf::Mouse::getPosition(accel::Framework::GetInstance()->GetWindow()));
 				if (m_Enemies.size() < maxEnemyCount)
 				{
@@ -139,8 +153,12 @@ private:
 	}
 
 	Point m_Player;
+	sf::CircleShape m_PlayerGiz;
 
 	std::vector<Point> m_Enemies;
 
 	const int maxEnemyCount = 100;
+
+	accel::IObjContainer<Point>* knnContainer;
+
 };

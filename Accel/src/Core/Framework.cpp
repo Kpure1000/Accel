@@ -46,7 +46,7 @@ namespace accel
 				this->OnEvent(ev);
 			}
 
-			m_Window->clear(sf::Color(158, 158, 158, 255));
+			m_Window->clear(sf::Color(28, 28, 28, 255));
 
 			for (auto& layer : m_LayerStack)
 			{

@@ -35,6 +35,8 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\acpch.h" />
+    <ClInclude Include="src\Accel\IObjContainer.h" />
+    <ClInclude Include="src\Accel\FlatList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Basic\Ray.cpp">
@@ -53,5 +55,6 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\acpch.cpp" />
+    <ClCompile Include="src\Accel\FlatList.cpp" />
   </ItemGroup>
 </Project>

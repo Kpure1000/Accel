@@ -97,7 +97,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Accel\FlatList.h" />
     <ClInclude Include="src\Accel.h" />
+    <ClInclude Include="src\Accel\IObjContainer.h" />
     <ClInclude Include="src\Basic\Ray.h" />
     <ClInclude Include="src\Core\Core.h" />
     <ClInclude Include="src\Core\EntryPoint.h" />
@@ -108,6 +110,7 @@
     <ClInclude Include="src\acpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Accel\FlatList.cpp" />
     <ClCompile Include="src\Basic\Ray.cpp" />
     <ClCompile Include="src\Core\Framework.cpp" />
     <ClCompile Include="src\Core\Layer.cpp" />
